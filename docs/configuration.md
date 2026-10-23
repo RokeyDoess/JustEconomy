@@ -11,7 +11,7 @@ Settings are created in `plugins/JustEconomy` on the first start. Existing files
 
 ## Currency
 
-The default currency symbol is `$`. Precision defaults to four decimal places so small rewards such as `0.0085` can be retained. Display uses two places and shows additional places when needed. Currency names, the starting balance, and maximum balance are configurable.
+The default currency symbol is `$`. Accounting precision defaults to four decimal places so small rewards such as `0.0085` can be retained. `economy.display-precision` independently defaults to exactly two decimal places, using half-up rounding: `0.0085` displays as `$0.01`, and `1.2345` as `$1.23`. This changes presentation only; balances, payments, and Vault transaction precision retain the accounting precision. Display precision can be set from zero to eight and changed with `/economy reload`. Existing configurations without this setting also default to two places. Currency names, the starting balance, and maximum balance are configurable.
 
 Precision is stored with the database and cannot be changed by reload or restart. Changing it requires a deliberate data conversion outside this release. Reducing the maximum below an existing balance, including reserved fees, is rejected. Internal amounts are bounded to prevent overflow. Vault's double-valued amounts are rounded half up to the configured precision; positive amounts that round to zero are rejected. Player-entered amounts must already fit the precision.
 

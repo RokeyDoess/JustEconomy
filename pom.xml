@@ -3,7 +3,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>io.github.rokeydoess</groupId>
   <artifactId>justeconomy</artifactId>
-  <version>0.0.1</version>
+  <version>0.0.2-SNAPSHOT</version>
   <name>JustEconomy</name>
   <description>A configurable Paper economy provider.</description>
   <url>https://github.com/RokeyDoess/JustEconomy</url>

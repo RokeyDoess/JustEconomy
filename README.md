@@ -14,6 +14,8 @@ Use one active economy provider. Disable the old provider before switching to Ju
 
 **0.0.1 is a prerelease.** Back up existing economy data before migrating and test configuration changes before using them on a live server.
 
+Development on `main` targets the unreleased `0.0.2`.
+
 ## Commands and features
 
 - `/balance`, `/balancetop`, and `/pay`, including optional distance limits and offline payments.
@@ -30,7 +32,7 @@ External command fees apply after the timer, immediately before dispatch. The ta
 
 ## Build and checks
 
-Use Java 25 and run `./mvnw verify` (`.\mvnw.cmd verify` on Windows). The distributable is `target/JustEconomy-0.0.1.jar`.
+Use Java 25 and run `./mvnw verify` (`.\mvnw.cmd verify` on Windows). The current development build is `target/JustEconomy-0.0.2-SNAPSHOT.jar`.
 
 The test suite covers monetary precision, concurrent transfers, rollback, backups, storage failures, imports, and configuration validation. [Development checks](docs/development.md) describes the isolated Paper/VaultUnlocked/JustJobs integration suite and its limits.
 

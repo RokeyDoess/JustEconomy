@@ -1,7 +1,9 @@
 # Money precision is saved with the database. Choose it before players start using it.
-# Four places retain small job rewards such as 0.0085. Display uses at least two places.
+# Four places retain small job rewards such as 0.0085 without displaying them all.
 economy:
   precision: 4
+  # Display rounding does not change balances or transaction amounts. Reloadable.
+  display-precision: 2
   symbol: '$'
   singular: coin
   plural: coins

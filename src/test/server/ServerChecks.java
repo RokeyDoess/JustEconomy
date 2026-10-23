@@ -120,6 +120,13 @@ public final class ServerChecks extends JavaPlugin implements Listener {
         check(economy.createPlayerAccount(oak.player) && economy.createPlayerAccount(birch.player), "Vault creates UUID accounts");
         check(economy.depositPlayer(oak.player, 0.0085).transactionSuccess(), "Vault accepts small fractional job earnings");
         check(plugin.ledger().balance(OAK) == 85, "Fractional deposit is stored exactly");
+        check(economy.format(economy.getBalance(oak.player)).equals("$0.01") && economy.fractionalDigits() == 4, "Vault displays two decimals while retaining four-decimal accounting");
+        Path displayConfig = plugin.getDataFolder().toPath().resolve("config.yml");
+        String displayDefaults = Files.readString(displayConfig);
+        Files.writeString(displayConfig, displayDefaults.replace("display-precision: 2", "display-precision: 4"));
+        plugin.reloadSettings();
+        check(economy.format(economy.getBalance(oak.player)).equals("$0.0085") && plugin.ledger().balance(OAK) == 85, "Display precision reloads without changing the saved balance");
+        Files.writeString(displayConfig, displayDefaults); plugin.reloadSettings();
         check(!economy.depositPlayer(oak.player, Double.NaN).transactionSuccess() && !economy.withdrawPlayer(oak.player, -1).transactionSuccess(), "Invalid Vault amounts fail without changing balances");
         plugin.ledger().set(OAK, 1_000_000); plugin.ledger().set(BIRCH, 1_000_000);
         check(economy.getBalance(oak.player, "other-world") == 100, "World overloads share the global balance");

@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.0.2 (Unreleased)
+
+- Currency displays now default to exactly two decimal places while retaining four-decimal accounting.
+- Added reloadable `economy.display-precision` for display rounding without changing saved balances or Vault transaction precision.
+
 ## 0.0.1 (2026-10-22)
 
 - First prerelease for Paper 26.3 and Java 25, with a Vault economy provider and saved UUID balances.

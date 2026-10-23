@@ -15,9 +15,24 @@ class ConfigurationTest {
     @Test void defaultConfigurationLoads() throws Exception {
         Settings settings = Settings.load(directory.toFile());
         assertEquals(4, settings.money().precision()); assertFalse(settings.offlinePay()); assertEquals(0, settings.payRange());
+        assertEquals(2, settings.money().displayPrecision());
         assertTrue(settings.commands().values().stream().allMatch(Boolean::booleanValue));
         assertTrue(settings.cancelDamage()); assertEquals(3, settings.tpa().seconds());
         new Messages(directory.resolve("messages.yml").toFile(), getClass().getResourceAsStream("/messages.yml"));
+    }
+    @Test void displayPrecisionDefaultsForExistingConfigsAndValidatesSeparately() throws Exception {
+        Path file = directory.resolve("config.yml");
+        String config = Files.readString(file);
+        Files.writeString(file, config.replace("  display-precision: 2\n", ""));
+        assertEquals(2, Settings.load(directory.toFile()).money().displayPrecision());
+        Files.writeString(file, config.replace("display-precision: 2", "display-precision: 4"));
+        Settings detailed = Settings.load(directory.toFile());
+        assertEquals(4, detailed.money().precision());
+        assertEquals("$0.0085", detailed.money().format(85));
+        Files.writeString(file, config.replace("display-precision: 2", "display-precision: 2.5"));
+        assertThrows(IllegalArgumentException.class, () -> Settings.load(directory.toFile()));
+        Files.writeString(file, config.replace("display-precision: 2", "display-precision: 9"));
+        assertThrows(IllegalArgumentException.class, () -> Settings.load(directory.toFile()));
     }
     @Test void invalidValuesDoNotFallBackSilently() throws Exception {
         String config = Files.readString(directory.resolve("config.yml"));

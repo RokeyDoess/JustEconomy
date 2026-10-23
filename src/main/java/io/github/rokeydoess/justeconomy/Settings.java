@@ -26,7 +26,7 @@ public record Settings(Money money, long initial, long maximum, Map<String, Bool
         for (String section : List.of("economy", "commands", "payments", "leaderboard", "teleport", "teleport.spawn", "teleport.tpa", "standstill"))
             if (c.contains(section) && !c.isConfigurationSection(section)) throw new IllegalArgumentException(section + " must be a section");
         int precision = integer(c, "economy.precision", 4, 0, 8);
-        Money money = new Money(precision, text(c, "economy.symbol", "$"), text(c, "economy.singular", "coin"), text(c, "economy.plural", "coins"));
+        Money money = new Money(precision, integer(c, "economy.display-precision", 2, 0, 8), text(c, "economy.symbol", "$"), text(c, "economy.singular", "coin"), text(c, "economy.plural", "coins"));
         long maximum = money.parse(text(c, "economy.maximum-balance", "1000000000"));
         long initial = money.parse(text(c, "economy.starting-balance", "0"));
         if (maximum <= 0 || maximum > 9_000_000_000_000_000L || initial > maximum) throw new IllegalArgumentException("Invalid maximum or starting balance");

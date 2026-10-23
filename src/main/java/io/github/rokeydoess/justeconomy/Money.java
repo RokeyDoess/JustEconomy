@@ -6,10 +6,13 @@ import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
 import java.util.Locale;
 
-public record Money(int precision, String symbol, String singular, String plural) {
+public record Money(int precision, int displayPrecision, String symbol, String singular, String plural) {
     public Money {
         if (precision < 0 || precision > 8) throw new IllegalArgumentException("economy.precision must be between 0 and 8");
+        if (displayPrecision < 0 || displayPrecision > 8) throw new IllegalArgumentException("economy.display-precision must be between 0 and 8");
     }
+
+    public Money(int precision, String symbol, String singular, String plural) { this(precision, 2, symbol, singular, plural); }
 
     public long parse(String value) {
         try {
@@ -42,7 +45,7 @@ public record Money(int precision, String symbol, String singular, String plural
     }
 
     public String display(BigDecimal amount) {
-        String pattern = "#,##0" + (precision == 0 ? "" : "." + "0".repeat(Math.min(2, precision)) + "#".repeat(Math.max(0, precision - 2)));
-        return symbol + new DecimalFormat(pattern, DecimalFormatSymbols.getInstance(Locale.US)).format(amount);
+        String pattern = "#,##0" + (displayPrecision == 0 ? "" : "." + "0".repeat(displayPrecision));
+        return symbol + new DecimalFormat(pattern, DecimalFormatSymbols.getInstance(Locale.US)).format(amount.setScale(displayPrecision, RoundingMode.HALF_UP));
     }
 }
