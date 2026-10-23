@@ -1,0 +1,36 @@
+name: JustEconomy
+version: '${project.version}'
+main: io.github.rokeydoess.justeconomy.JustEconomyPlugin
+api-version: '26.3'
+description: A configurable economy provider, payments, and teleport commands.
+author: RokeyDoess
+website: https://github.com/RokeyDoess/JustEconomy
+depend: [Vault]
+loadbefore: [JustJobs]
+permissions:
+  justeconomy.balance:
+    default: true
+  justeconomy.balance.others:
+    default: op
+  justeconomy.balancetop:
+    default: true
+  justeconomy.pay:
+    default: true
+  justeconomy.spawn:
+    default: true
+  justeconomy.setspawn:
+    default: op
+  justeconomy.tpa:
+    default: true
+  justeconomy.tpaccept:
+    default: true
+  justeconomy.tpdeny:
+    default: true
+  justeconomy.tpacancel:
+    default: true
+  justeconomy.economy:
+    default: op
+  justeconomy.bypass.cost:
+    default: false
+  justeconomy.bypass.timer:
+    default: false

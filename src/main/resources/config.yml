@@ -1,0 +1,50 @@
+# Money precision is saved with the database. Choose it before players start using it.
+# Four places retain small job rewards such as 0.0085. Display uses at least two places.
+economy:
+  precision: 4
+  symbol: '$'
+  singular: coin
+  plural: coins
+  starting-balance: '0'
+  maximum-balance: '1000000000'
+
+# false leaves a command and its aliases available to another plugin.
+# Command registration changes take effect after a server restart.
+commands:
+  balance: true
+  balancetop: true
+  pay: true
+  spawn: true
+  setspawn: true
+  tpa: true
+  tpaccept: true
+  tpdeny: true
+  tpacancel: true
+  economy: true
+
+payments:
+  allow-offline: false
+  # 0 disables range checks. Otherwise use the straight-line distance in blocks,
+  # including height. Both players must be online and in the same world.
+  range: 0
+
+leaderboard:
+  page-size: 10
+
+teleport:
+  allow-cross-world: true
+  request-expiry-seconds: 60
+  # Built-in teleports only charge after completion. Failed attempts are refunded.
+  # A matching command rule overrides these cost and timer defaults.
+  spawn:
+    cost: '0'
+    standstill-seconds: 3
+  tpa:
+    cost: '0'
+    standstill-seconds: 3
+
+standstill:
+  cancel-on-movement: true
+  cancel-on-damage: true
+  # Looking around is allowed. Distance is measured from the starting position.
+  movement-tolerance: 0.1

@@ -1,0 +1,24 @@
+# Rules apply to player-entered commands. No rules are enabled by default.
+# Use literal command words, not regular expressions or permission expressions.
+# The longest matching command/subcommand wins. Equal-length alias matches use
+# the first rule in this list. Resolved aliases and namespaces share a rule.
+# Costs are charged after the timer, immediately before an external command runs.
+# The receiving plugin can still reject that command, for example for a missing home.
+# Built-in spawn and tpa charge only for a completed teleport; tpa waits after acceptance.
+# Bypasses: justeconomy.bypass.cost and justeconomy.bypass.timer (both default false).
+rules: []
+
+# Cost only:
+# - command: 'home'
+#   cost: '10'
+#   standstill-seconds: 0
+#
+# Timer only:
+# - command: 'minecraft:give'
+#   cost: '0'
+#   standstill-seconds: 5
+#
+# Cost and timer, restricted to a subcommand:
+# - command: 'warp market'
+#   cost: '2.50'
+#   standstill-seconds: 3

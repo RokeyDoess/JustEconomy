@@ -1,0 +1,22 @@
+# Build output and local runtime data
+/target/
+/build/
+/.gradle/
+/run/
+/test-server/
+/test server/
+*.log
+
+# Editors and operating systems
+/.idea/
+/.vscode/
+*.iml
+.DS_Store
+Thumbs.db
+
+# Local credentials and settings
+.env
+.env.*
+!.env.example
+*.key
+*.pem
